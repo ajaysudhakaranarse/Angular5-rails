@@ -11,12 +11,24 @@ class BookController < ApplicationController
     end
   end
 
+  def update
+    @book = Book.find(params[:id])
+    if @book.update(book_params)
+      render json: @book
+    end
+  end
+
   def index
     @book = Book.all
     respond_to do |format|
       format.html
       format.json { render :json => @book}
     end
+  end
+
+  def destroy
+    @book = Book.find(params[:id])
+    @book.destroy
   end
 
   private

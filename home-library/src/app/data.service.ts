@@ -12,14 +12,16 @@ import 'rxjs/add/observable/throw';
 
 export class DataService {
 
-  private url = "http://localhost:3000/book.json";
-  private url1 = "http://localhost:3000/book";
+
+
   public books;
   public books_list;
   constructor(private http :HttpClient) { }
 
   getBooks():Observable<IBook[]>{
-    return this.http.get<IBook[]>(this.url)
+    let url = "http://localhost:3000/book.json";
+
+    return this.http.get<IBook[]>(url)
                     .catch(this.errorHandler);
   }
   errorHandler(error :HttpErrorResponse){
@@ -27,8 +29,22 @@ export class DataService {
   }
 
   addBook(book: IBook): Observable<IBook[]>{
-    //console.log("-----addMethod",book);
-    return this.http.post<IBook[]>(this.url1,book)
+    let url =  "http://localhost:3000/book";
+    console.log(book)
+    return this.http.post<IBook[]>(url,book)
                     .catch(this.errorHandler)
+  }
+
+  deleteBook(id: number):Observable<IBook[]>{
+    let url = `http://localhost:3000/book/${id}`;
+
+    return this.http.delete(url)//.subscribe(res => console.log(res))
+                    .catch(this.errorHandler)
+  }
+  updateBook(id :number,book :IBook):Observable<IBook>{
+    console.log(id,book)
+    let url = `http://localhost:3000/book/${id}`
+    console.log(url)
+    return this.http.put<IBook>(url,book)
   }
 }

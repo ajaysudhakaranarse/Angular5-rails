@@ -1,20 +1,23 @@
-<p>
-  books-list works!
-</p>
-<button (click)="getBooks()">All Book</button>
-<button (click)="addBook()">Add Books</button><br><br>
-<table *ngIf = "flag == 'index'" border="1">
-  <tr *ngFor = "let book of books">
-    <td>{{book.name}}</td>
-    <td><button (click)="deleteBook(book.name)">delete</button></td>
-  </tr>
-</table>
-<div *ngIf = "flag == 'create'">
-  <form>
-  <h1>Add Book</h1>
-  <input type = "text" name="book" [(ngModel)]="bname.name">
-  <input type = "submit" value ="Add" (click)="submit()">
-  {{bname.name}}
+<form>
+  <br><br>
+  <button (click)="getBooks()">All Book</button>
+  <button (click)="addBook()">Add Books</button><br><br>
+  <table *ngIf = "flag == 'index'" border="1">
+    <tr *ngFor = "let book of books">
+      <td>{{book.name}}</td>
+      <td><button (click)="deleteBook(book.id)">delete</button></td>
+      <td><button (click)="updateBook(book.id,book.name)">update</button></td>
+    </tr>
+  </table>
+  <div *ngIf = "flag == 'create'">
+    <h1>Add Book</h1>
+    <input type = "text" name="book" [(ngModel)]="bname.name">
+    <input type = "submit" value ="Add" (click)="submit()">
+    {{bname.name}}
+  </div>
+  <div *ngIf = "flag == 'update'">
+    <input type = "text" value="{{update_name.name}}" name="updateBook" [(ngModel)]="update_name.name">
+    <input type = "submit" value="update" (click)="update()">
+  </div>
+  {{errorMsg}}
 </form>
-{{errorMsg}}
-</div>
