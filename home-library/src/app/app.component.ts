@@ -11,10 +11,10 @@ export class AppComponent {
   public books;
 
   constructor(private http :HttpClient){
-    console.log("here")
-
-    http.get("http://localhost:3000/book.json").subscribe(res => this.books = res)
-    console.log(this.books)
+    // console.log("here")
+    //
+    // http.get("http://localhost:3000/book.json").subscribe(res => this.books = res)
+    // console.log(this.books)
   }
 
   getBooks(){
